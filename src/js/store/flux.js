@@ -1,49 +1,14 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
 			baseUrl: 'https://playground.4geeks.com/apis/fake/contact',
 			agenda: 'Merlina',
 			user:[],
 			currentId: '',
+			statusClient: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-
-				
-			},
 			getContacts: async () =>{
 				const url = getStore().baseUrl + '/agenda/' + getStore().agenda;
 				const options = {
@@ -54,9 +19,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					console.log(data);
 					setStore({user: data});
+					getActions().handleStatusContact()
 				} else {
 					console.log('Error: ', response.status, response.statusText)
 				}
+			},
+			handleStatusContact: () =>{
+				let arr = []
+				getStore().user.map(i =>{
+					arr.push({'id': i.id, 'status': 'Cliente potencial'})
+				})
+				setStore({statusClient: arr});
+				localStorage.setItem('status', JSON.stringify(arr))
 			},
 			createContact: async(newContact) =>{
 				const url = getStore().baseUrl;

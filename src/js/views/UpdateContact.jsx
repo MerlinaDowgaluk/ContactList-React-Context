@@ -27,7 +27,7 @@ export const UpdateContact = () => {
 
     return (
         <div className="bg-light">
-            <h1 className="text-center">Add new Contact</h1>
+            <h1 className="text-center">Modificar Contacto</h1>
             <form onSubmit={handleOnSubmit}>
                 <div className="m-3">
                     <label for="exampleInputEmail1" class="form-label">Full Name</label>
@@ -49,6 +49,11 @@ export const UpdateContact = () => {
                     <input type="text" className="form-control" id="exampleInputAdress" aria-describedby="adress" placeholder="Enter address"
                     value={address} onChange={(e) =>{setAddress(e.target.value)}}/>
                 </div>
+                <select className="form-select">
+					<option value="Cliente potencial de ventas">Cliente potencial de ventas</option>
+					<option value="Cliente potencial">Cliente potencial</option>
+					<option value="Cliente">Cliente</option>
+				</select>
                 <div class="d-grid gap-2">
                     <button type="submit" className="btn btn-secondary color-button m-3">Submit</button>
                 </div>

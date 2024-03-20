@@ -19,28 +19,32 @@ export const Home = () => {
 	return (
 	<div className="text-center mt-5 m-4">
 			  {store.user.map((item, index) => {
-                return <div className="row g-0 border rounded m-2">
-						<div className="col-md-4">
-						  <img src="https://picsum.photos/id/237/200" className="img-fluid rounded-circle m-1" alt="..." />
+                return <div className="row g-0 m-2 justify-content-center">
+						<div className="col-8 border rounded border-4 d-flex p-2">
+						<div className="col-md-3 ms-5 mt-2">
+						  <p className="bg-dark rounded-circle pt-4" style={{borderRadius: '50%', width: '100px', height: '100px'}}>{item.full_name[0]}</p>
 						</div>
-						<div className="col-md-4">
+						<div className="col-md-5">
 						  <div className="card-body text-start">
-							<h5 className="card-title m-1">{item.full_name}</h5>
-							<p className="card-text m-1 text-secondary"><i class="fas fa-map-pin pe-1"></i>{item.address}</p>
-							<p className="card-text m-1 text-secondary"><i class="fas fa-phone pe-1"></i>{item.phone}</p>
-							<p className="card-text m-1 text-secondary"><i class="fas fa-envelope pe-1"></i>{item.email}</p>
+							<h4 className="card-title m-1">{item.full_name}</h4>
+							<h5 className="card-text m-1 text-secondary">{store.statusClient[index].status}</h5>
+							<p className="card-text m-1 text-secondary"><i class="fas fa-map-pin pe-2"></i>{item.address}</p>
+							<p className="card-text m-1 text-secondary"><i class="fas fa-phone pe-2"></i>{item.phone}</p>
+							<p className="card-text m-1 text-secondary"><i class="fas fa-envelope pe-2"></i>{item.email}</p>
 						  </div>
 						</div>
-						<div className="col-md-4 text-end mt-2">
+						<div className="col-md-3 text-end mt-2 border-0">
 							<span type="button" onClick={()=>{handleActualice(item.id)}} className="border-0 text-dark bg-white"><i className="far fa-edit fa-lg p-2 pe-4"></i></span>
 							<span type="button" onClick={()=>{handleDelete(item.id)}} className="border-0 text-dark bg-white"><i className="fas fa-trash-alt fa-lg p-2 ps-4"></i></span>
 						</div>
-						
+						</div>
 				  		</div>
                     })}
-			<span className="list-group-item bg-light text-end fw-lighter">
+			<div className="justify-content-center d-flex p-2">
+			<span className="list-group-item bg-light text-end fw-lighter col-8 m-2 p-2 border-3 rounded">
                         {store.user.length === 0 ? "No contacts, add one please" : store.user.length + " contacts."}
             </span>
+			</div>
 	</div>
 	
 )}
