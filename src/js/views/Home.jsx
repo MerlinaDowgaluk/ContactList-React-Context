@@ -17,6 +17,11 @@ export const Home = () => {
 	}
 
 	return (
+	store.statusClient.length < 1 ?
+	<div class="spinner-border" role="status">
+  		<span class="visually-hidden">Loading...</span>
+	</div>
+	:
 	<div className="text-center mt-5 m-4">
 			  {store.user.map((item, index) => {
                 return <div className="row g-0 m-2 justify-content-center">

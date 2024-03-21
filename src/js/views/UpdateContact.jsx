@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/index.css";
 import { Context } from "../store/appContext.js";
 
 export const UpdateContact = () => {
     const { store, actions } = useContext(Context);
-    const [ name, setName ] = useState("");
-    const [ address, setAddress ] = useState("");
-    const [ phone, setPhone ] = useState("");
-    const [ email, setEmail ] = useState("");
+    const [ name, setName ] = useState(store.currentContact.full_name);
+    const [ address, setAddress ] = useState(store.currentContact.address);
+    const [ phone, setPhone ] = useState(store.currentContact.phone);
+    const [ email, setEmail ] = useState(store.currentContact.email);
+    const [ status, setStatus ] = useState(store.currentStatus.status)
     const navigate = useNavigate();
-
 
     const handleOnSubmit = (event) =>{
         event.preventDefault();
@@ -22,13 +22,16 @@ export const UpdateContact = () => {
             agenda_slug: 'Merlina'
         };
         actions.actualiceContact(contact);
+        actions.handleActualiceStatusContact(store.currentContact.id, status)
         navigate('/')
     }
 
     return (
-        <div className="bg-light">
-            <h1 className="text-center">Modificar Contacto</h1>
+        <div className="bg-light border-0">
+            <h1 className="text-center mt-3">Modify Contact</h1>
             <form onSubmit={handleOnSubmit}>
+                <div className="container">
+                <div className="justify-content-center">
                 <div className="m-3">
                     <label for="exampleInputEmail1" class="form-label">Full Name</label>
                     <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="fullName" placeholder="Full Name" 
@@ -49,15 +52,20 @@ export const UpdateContact = () => {
                     <input type="text" className="form-control" id="exampleInputAdress" aria-describedby="adress" placeholder="Enter address"
                     value={address} onChange={(e) =>{setAddress(e.target.value)}}/>
                 </div>
-                <select className="form-select">
+                <div className="m-3">
+                <p className="form-label">Status client</p>
+                <select className="form-select" value={status} onChange={e => setStatus(e.target.value)}>
 					<option value="Cliente potencial de ventas">Cliente potencial de ventas</option>
 					<option value="Cliente potencial">Cliente potencial</option>
 					<option value="Cliente">Cliente</option>
 				</select>
-                <div class="d-grid gap-2">
-                    <button type="submit" className="btn btn-secondary color-button m-3">Submit</button>
+                </div>
+                <div class="justify-content-center d-flex">
+                    <button type="submit" className="btn btn-success color-button m-3 col-4">Submit</button>
                 </div>
                 <Link className="m-3 text-dark" to="/"> or get back to contacts.</Link>
+                </div>
+                </div>
             </form>
         </div>
     )

@@ -25,9 +25,11 @@ export const AddContact = () => {
     }
 
     return (
-        <div className="bg-light">
-            <h1 className="text-center">Add new Contact</h1>
+        <div className="bg-light border-0">
+            <h1 className="text-center mt-3">Add new Contact</h1>
             <form onSubmit={handleOnSubmit}>
+                <div className="container">
+                <div className="justify-content-center">
                 <div className="m-3">
                     <label for="exampleInputEmail1" class="form-label">Full Name</label>
                     <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="fullName" placeholder="Full Name" 
@@ -48,11 +50,14 @@ export const AddContact = () => {
                     <input type="text" className="form-control" id="exampleInputAdress" aria-describedby="adress" placeholder="Enter address"
                     value={address} onChange={(e) =>{setAddress(e.target.value)}}/>
                 </div>
-                <div class="d-grid gap-2">
-                    <button type="submit" className="btn btn-secondary color-button m-3">Submit</button>
+                <div class="justify-content-center d-flex">
+                    <button type="submit" className="btn btn-success color-button m-3 col-4">Submit</button>
                 </div>
                 <Link className="m-3 text-dark" to="/"> or get back to contacts.</Link>
+                </div>
+                </div>
             </form>
+            
         </div>
     )
 }
